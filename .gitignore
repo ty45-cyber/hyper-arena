@@ -1,0 +1,20 @@
+# Rust / Axum backend artifacts
+/target
+/backend/target
+**/*.rs.bk
+*.pdb
+
+# Node.js / Next.js frontend artifacts
+node_modules/
+/frontend/node_modules
+.next/
+/frontend/.next
+out/
+build/
+dist/
+.DS_Store
+
+# Environment & local secrets
+.env
+.env*.local
+*.log
