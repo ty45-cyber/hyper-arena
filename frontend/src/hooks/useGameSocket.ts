@@ -1,20 +1,21 @@
 import { useState, useRef, useCallback } from 'react';
 
-// Export GameState so components like Arena.tsx can type their refs/props
-export interface PlayerPosition {
-  x: number;
-  y: number;
-  score?: number;
-}
-
 export interface GameState {
   tick: number;
-  players: Record<string, PlayerPosition>;
+  ball_x: number;
+  ball_y: number;
+  p1_x: number;
+  p1_y: number;
+  p2_x: number;
+  p2_y: number;
+  p1_score?: number;
+  p2_score?: number;
+  [key: string]: any; // Index signature fallback for additional custom state properties
 }
 
 export function useGameSocket(baseUrl: string, jwt: string | null) {
   const [status, setStatus] = useState<'IDLE' | 'SEARCHING' | 'PLAYING'>('IDLE');
-  const [playerId, setPlayerId] = useState<string | null>(null);
+  const [playerId, setPlayerId] = useState<number | string | null>(null);
   const gameStateRef = useRef<GameState | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
 
