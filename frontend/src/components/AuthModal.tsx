@@ -18,9 +18,10 @@ export default function AuthModal({ onSuccess }: AuthModalProps) {
     setLoading(true);
 
     const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
     try {
-      const res = await fetch(`http://localhost:4000${endpoint}`, {
+      const res = await fetch(`${baseUrl}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -29,7 +30,7 @@ export default function AuthModal({ onSuccess }: AuthModalProps) {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || typeof data === 'string' ? data : 'Authentication failed');
+        throw new Error(data.error || (typeof data === 'string' ? data : 'Authentication failed'));
       }
 
       localStorage.setItem('arena_jwt', data.token);

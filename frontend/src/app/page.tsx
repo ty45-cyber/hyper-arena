@@ -30,8 +30,10 @@ export default function Home() {
     setUsername(null);
   };
 
+  const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:4000/ws';
+
   const { connect, status, playerId, gameStateRef, sendInput } = useGameSocket(
-    'ws://localhost:4000/ws',
+    wsUrl,
     jwt
   );
 
